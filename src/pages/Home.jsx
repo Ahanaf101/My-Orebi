@@ -7,6 +7,8 @@ import BestPhone from '../components/Bestphone'
 import Product from '../components/Product'
 
 
+
+
 const Home = () => {
   return (
     <>
@@ -14,7 +16,7 @@ const Home = () => {
       <Addsale/>
       <NewArrivals/>
       <BestPhone/>
-      <Product/>
+       <Product/>
       
     </>
   )

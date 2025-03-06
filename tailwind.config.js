@@ -9,7 +9,10 @@ export default {
       fontFamily: {
         'dm': ['DM Sans' , 'serif' ]
         
-      }
+      },
+      colors:{
+        primary:"#262626"
+      },
     },
   },
   plugins: [],

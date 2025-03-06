@@ -1,17 +1,19 @@
 import Container from './Container'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Topone from '../assets/topone.png'
 import { FaHeart } from "react-icons/fa";
 import { HiMiniArrowPath } from "react-icons/hi2";
 import { FaCartShopping } from "react-icons/fa6";
-import axios from 'axios';
+
 import "slick-carousel/slick/slick.css";
 import Slider from 'react-slick';
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
-
+import { Link } from 'react-router-dom'
+import { ApiData } from './ContextApi';
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
+   
     return (
       <div
         className={className}
@@ -32,6 +34,7 @@ function SampleNextArrow(props) {
     );
   }
 const NewArrivals = () => {
+  let data = useContext(ApiData)
     var newSlider = {
        
         infinite: true,
@@ -43,19 +46,9 @@ const NewArrivals = () => {
         nextArrow:<SampleNextArrow/>,
         prevArrow:<SamplePrevArrow/>
         
-        }
-    let [data,setData] = useState([])
-    let getData = ()=>{
-        axios.get("https://dummyjson.com/products").then((response)=>{
-            setData(response.data.products);
-            
-        })
-    }
-    useEffect(()=>{
-        getData()
-    },[])
-    console.log(data);
+        };
     
+       
   return (
     <section className='pt-[128px]'>
         <Container>
@@ -66,12 +59,19 @@ const NewArrivals = () => {
                    {data.map((item)=>(
                 <div className="!w-[90%]">
                     <div className="relative group overflow-y-hidden">
-                        <img className='w-full' src={item.thumbnail} alt="" />
+                                     <Link to="shop">
+                                      <img className='w-full' src={item.thumbnail} alt="" />  
+                                     </Link>
+                     
+                        
 
+                        <div className="absolute top-[20px] left-[20px] bg-primary text-white hover:bg-white hover:text-black hover:border-[.2px] hover:border-black  font-bold py-[13px] px-[30px] inline-block">
+                  New
+                </div>
                         <div className="w-full absolute bottom-0 left-0 duration-300 ease-in-out opacity-0 group-hover:opacity-100 h-0 group-hover:h-[150px] bg-white">
                             <ul className='flex items-center h-full justify-end'>
                                 <div className=" ">
-                                     <li className='flex text-center gap-x-4 justify-end py-1 cursor-pointer'>Add to Wish List <FaHeart className='mr-2 cursor-pointer hover:text-red-600'/></li>
+                                     <li className='flex text-center gap-x-4 justify-end py-1 cursor-pointer'>Add to Wish List <FaHeart className='mr-2 curs hover:text-red-600'/></li>
                                 <li className='flex text-center gap-x-4 py-1 justify-end cursor-pointer'>Replacement <HiMiniArrowPath className='ml-5 cursor-pointer mr-2 hover:text-red-600' /></li>
                                 <li className='flex text-center gap-x-4 py-1 justify-end cursor-pointer'>Add to Cart<FaCartShopping className='cursor-pointer ml-8 mr-2 hover:text-red-600' /></li>
                                 </div>
